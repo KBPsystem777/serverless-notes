@@ -1,8 +1,7 @@
-import uuid from 'uuid';
-import AWS from 'aws-sdk';
-import * as dynamoDbLib from './libs/dynamodb-lib';
-import { success, failure } from './libs/response-lib';
-
+import uuid from "uuid";
+import AWS from "aws-sdk";
+import * as dynamoDbLib from "./libs/dynamodb-lib";
+import { success, failure } from "./libs/response-lib";
 
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
@@ -15,12 +14,12 @@ export async function main(event, context) {
       noteId: uuid.v4(),
       content: data.content,
       attachment: data.attachment,
-      createdAt: Date.now(),
-    },
+      createdAt: Date.now()
+    }
   };
 
   try {
-    await dynamoDbLib.call('put', params);
+    await dynamoDbLib.call("put", params);
     return success(params.Item);
   } catch (e) {
     console.log(e);
@@ -30,8 +29,8 @@ export async function main(event, context) {
   dynamoDB.put(params, (error, data) => {
     // Set response headers to enable CORS
     const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Credentials': true,
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": true
     };
 
     // Return status code 500 on error
@@ -40,8 +39,8 @@ export async function main(event, context) {
         statusCode: 500,
         headers,
         body: JSON.stringify({
-          status: false,
-        }),
+          status: false
+        })
       };
       callback(null, response);
       return;
@@ -50,7 +49,7 @@ export async function main(event, context) {
     const response = {
       statusCode: 200,
       headers,
-      body: JSON.stringify(params.Item),
+      body: JSON.stringify(params.Item)
     };
     callback(null, response);
   });
