@@ -1,7 +1,7 @@
 {
-    "requestContext": {
-        "identity": {
-            "cognitoIdentityId": "USER-SUB-7777"
-        }
+  "requestContext": {
+    "identity": {
+      "cognitoIdentityId": "USER-SUB-7777"
     }
+  }
 }
