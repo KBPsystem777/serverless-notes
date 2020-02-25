@@ -48,8 +48,22 @@ functions:
           method: get
           cors: true
           authorizer: aws_iam
-
-
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
+          method: get
+          cors: true
+          authorizer: aws_iam
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer: aws_iam
 custom:
   bundle:
     linting: false
